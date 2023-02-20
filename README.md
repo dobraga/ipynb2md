@@ -8,7 +8,7 @@ Example documentation in `docs/index.html`.
 ## Installation
 
 ```
-pipx install git+https://github.com/dobraga/ipynb2md --python python3.10
+pipx install git+https://github.com/dobraga/ipynb2md --python python3.10 --include-deps
 ```
 
 ## Example usage
