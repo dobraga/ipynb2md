@@ -2,6 +2,11 @@
 
 Convert Jupyter Notebooks to Markdown files and single page html.
 
+Example documentation in `docs/index.html`.
+![example docs](docs/example.png)
+
+## Example usage
+
 ```
 ipynb2md --help
 
@@ -23,5 +28,3 @@ example usage removing code output and keep intermediary files.
 ```sh
 ipynb2md -i tests/example -rc -k -o docs/
 ```
-
-<iframe src="./docs/index.html"> </iframe>
