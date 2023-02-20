@@ -1,6 +1,7 @@
 Welcome to {{ cookiecutter.project }}'s documentation!
 =================================
 
+{{ cookiecutter.description }}
 
 ```{toctree}
 :maxdepth: 2

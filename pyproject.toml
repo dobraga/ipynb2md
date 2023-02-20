@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ipynb2md"
 version = "0.1.0"
-description = ""
+description = "Convert Jupyter Notebooks to Markdown files and single page html."
 authors = ["Douglas Braga <30268535+dobraga@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]

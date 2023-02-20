@@ -1,5 +1,6 @@
 {
     "project": "Project Name",
+    "description": "Description project",
     "name": "Project Name",
     "authors": "Authors",
     "version": "Version",
