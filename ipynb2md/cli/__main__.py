@@ -55,7 +55,10 @@ def parser():
     )
 
     input = Path(args.input).absolute()
-    output = Path(input, 'rendered')
+    if args.output:
+        output = Path(args.output, 'rendered').resolve()
+    else:
+        output = Path(input, 'rendered')
 
     rmtree(output, ignore_errors=True)
     makedirs(output, exist_ok=True)
