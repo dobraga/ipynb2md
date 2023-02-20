@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "ipynb2md"
+version = "0.1.0"
+description = ""
+authors = ["Douglas Braga <30268535+dobraga@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rich = "^13.3.1"
+furo = "^2022.12.7"
+myst-parser = "^0.18.1"
+cookiecutter = "^2.1.1"
+zundler = {git = "https://github.com/AdrianVollmer/Zundler"}
+toml = "^0.10.2"
+
+[tool.poetry.scripts]
+ipynb2md = "ipynb2md.cli.__main__:cli"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.0.4"
+pytest = "^7.2.1"
+autopep8 = "^2.0.1"
+pandas = "^1.5.3"
+seaborn = "^0.12.2"
+plotly = "^5.13.0"
+altair = "^4.2.2"
+ipykernel = "^6.21.2"
+nbformat = "^5.7.3"
+scikit-learn = "^1.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
