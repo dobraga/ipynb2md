@@ -5,6 +5,12 @@ Convert Jupyter Notebooks to Markdown files and single page html.
 Example documentation in `docs/index.html`.
 ![example docs](docs/example.png)
 
+## Installation
+
+```
+pipx install git+https://github.com/dobraga/ipynb2md --python python3.10
+```
+
 ## Example usage
 
 ```
