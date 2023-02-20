@@ -17,8 +17,7 @@ options:
   -v, --verbose         Show more output in logs
 ```
 
-
 example usage removing code output and keep intermediary files.
 ```sh
-ipynb2md -i tests/example -v -rc -k
+ipynb2md -i tests/example -rc -k -o docs/
 ```

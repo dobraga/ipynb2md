@@ -26,7 +26,7 @@ def cli():
         LOG.debug(f'Moving from "{file}" to "{dst}"')
         rename(file, dst)
 
-    command = f'sphinx-build {output}/ipynb2md {output}/output -b zundler'
+    command = f'sphinx-build {output}/ipynb2md {output}/output -b zundler -q'
     LOG.info(f'Running "{command}"')
     system(command)
 

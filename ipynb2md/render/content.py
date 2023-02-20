@@ -38,7 +38,7 @@ class Code:
         if 'outputs' in self.content:
             for o in self.content['outputs']:
                 if 'text' in o:
-                    output += '\n{}\n'.format(''.join(o['text']))
+                    output += '{}\n\n'.format(''.join(o['text']))
                 elif 'data' in o:
                     data = o['data']
 
@@ -55,6 +55,9 @@ class Code:
                     elif 'image/png' in data:
                         output += '<img src="data:image/png;base64,{}"/>\n\n'.format(
                             data['image/png'])
+
+                    elif 'text/plain' in data:
+                        output += ''.join(data['text/plain']) + '\n\n'
 
                     else:
                         LOG.warning(
