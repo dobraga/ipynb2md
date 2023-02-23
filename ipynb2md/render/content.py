@@ -50,6 +50,11 @@ class Code:
                     elif 'text/html' in data:
                         html = ''.join(data['text/html']).replace('\n', '')
                         html = STYLE.sub('', html)
+                        if 'PlotlyConfig' in html:
+                            html = SCRIPT.sub('', html)
+                        html = html.replace(
+                            '<table', '<div class="wrapper_table"> <table')
+                        html = html.replace('</table>', '</table></div>')
                         output += '{}\n\n'.format(html)
 
                     elif 'image/png' in data:
@@ -85,4 +90,5 @@ Plotly.newPlot('plotly_{id}', figure.data, figure.layout, figure.config);
 
 
 LOG = getLogger(__name__)
-STYLE = compile(r'<style.+>.*<\/style>')
+STYLE = compile(r'<style.+>?<\/style>')
+SCRIPT = compile(r'<script.+>?<\/script>')

@@ -1,0 +1,31 @@
+.wrapper_table {
+    overflow-x: auto;
+    margin-bottom: 25px;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    background-color: var(--tabs--label-border--active);
+    color: #ffffff;
+    text-align: left;
+}
+
+table th,
+table td {
+    padding: 3px 10px;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: var(--color-background-item);
+}
+
+table tbody tr.active-row {
+    font-weight: bold;
+    color: var(--tabs--label-border--active);
+}

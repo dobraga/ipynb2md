@@ -27,6 +27,8 @@ altair = "^4.2.2"
 ipykernel = "^6.21.2"
 nbformat = "^5.7.3"
 scikit-learn = "^1.2.1"
+ipywidgets = "^8.0.4"
+jupyterlab = "^3.6.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

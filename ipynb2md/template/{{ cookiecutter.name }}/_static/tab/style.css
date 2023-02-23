@@ -1,0 +1,37 @@
+/* Style the tab */
+.tabs_ipynb2md {
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+/* Style the buttons inside the tab */
+.tab_link_ipynb2md {
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: var(--tabs--label-text);
+    background-color: var(--tabs--label-background);
+}
+
+/* Change background color of buttons on hover */
+.tab_link_ipynb2md:hover {
+    color: var(--tabs--label-text--hover);
+    border-color: var(--tabs--label-border--hover);
+}
+
+/* Create an active/current tablink class */
+.tab_link_ipynb2md.active {
+    color: var(--tabs--label-text--active);
+    border-color: var(--tabs--label-border--active);
+    border-radius: 10px 10px 0px 0px;
+}
+
+/* Style the tab content */
+.tab_content_ipynb2md {
+    padding: 6px 10px;
+    display: none;
+}
