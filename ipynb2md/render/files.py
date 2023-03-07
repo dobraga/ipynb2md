@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .file import ipynb2md
+from .file import render
 
 
 def render_files(input: Path, output: Path, remove_code: bool) -> list[str]:
@@ -8,7 +8,9 @@ def render_files(input: Path, output: Path, remove_code: bool) -> list[str]:
     for file in input.glob('**/*.ipynb'):
         if '/.ipynb_checkpoints/' in str(file):
             continue
-        ipynb2md(file, output, remove_code)
+
+        o = Path(output, file.with_suffix('.md').name)
+        render(file, o, remove_code)
         files.append(file.with_suffix('').name)
 
     return sorted(files)

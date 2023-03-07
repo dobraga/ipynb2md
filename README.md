@@ -32,5 +32,10 @@ options:
 
 example usage removing code output and keep intermediary files.
 ```sh
-ipynb2md -i tests/example -rc -k -o docs/
+ipynb2md -i tests/example -rc -o docs
+```
+
+convert just one notebook
+```sh
+ipynb2md -i tests/example/exploring/00.data.ipynb -rc -k -o docs/
 ```

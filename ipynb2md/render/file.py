@@ -5,14 +5,11 @@ from logging import getLogger
 from ipynb2md.render.content import parse_content
 
 
-def ipynb2md(input, output, show_code=True) -> None:
-    input = Path(input)
-    LOG.debug(f'Reading content from "{input}"')
-
-    output = Path(output, input.with_suffix('.md').name)
+def render(input, output, show_code=True) -> None:
+    LOG.info(f'"{input}" -> "{output}"')
 
     contents = []
-    for cell in loads(input.read_text())['cells']:
+    for cell in loads(Path(input).read_text())['cells']:
         contents.append(parse_content(cell))
 
     plotly_add = False
@@ -23,8 +20,6 @@ def ipynb2md(input, output, show_code=True) -> None:
                 f.write(PLOTLY)
                 plotly_add = True
             f.write(html)
-
-    LOG.info(f'"{input}" -> "{output}"')
 
 
 PLOTLY = '<script src="https://cdn.plot.ly/plotly-2.18.0.min.js"></script>\n'

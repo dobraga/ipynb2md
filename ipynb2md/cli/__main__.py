@@ -6,34 +6,39 @@ from argparse import ArgumentParser
 from shutil import rmtree
 from pathlib import Path
 
-from ipynb2md.render import render_files
+from ipynb2md.render import render_files, render
 from ipynb2md.conf import project_config
 
 
 def cli():
-    input, output, remove_code, keep_files = parser()
-    LOG.debug(f'Running from "{input}" -> "{output}"')
-    files = render_files(input, output, remove_code)
+    input, output, tp, remove_code, keep_files = parser()
+    LOG.info(f'{tp}: Running from "{input}" -> "{output}"')
 
-    project_config(files)
+    if tp == 'file':
+        render(input, output, remove_code)
 
-    cookiecutter(str(Path(PROJECT, 'template')),
-                 no_input=True, output_dir=str(output),
-                 config_file='/tmp/ipynb2md.yml')
+    else:
+        files = render_files(input, output, remove_code)
 
-    for file in output.glob('*.md'):
-        dst = Path(file.parent, 'ipynb2md', file.name)
-        LOG.debug(f'Moving from "{file}" to "{dst}"')
-        rename(file, dst)
+        project_config(files)
 
-    command = f'sphinx-build {output}/ipynb2md {output}/output -b zundler -q'
-    LOG.info(f'Running "{command}"')
-    system(command)
+        cookiecutter(str(Path(PROJECT, 'template')),
+                     no_input=True, output_dir=str(output),
+                     config_file='/tmp/ipynb2md.yml')
 
-    rename(output/'output'/'index.html', output/'..'/'index.html')
+        for file in output.glob('*.md'):
+            dst = Path(file.parent, 'ipynb2md', file.name)
+            LOG.debug(f'Moving from "{file}" to "{dst}"')
+            rename(file, dst)
 
-    if not keep_files:
-        rmtree(output)
+        command = f'sphinx-build {output}/ipynb2md {output}/output -b zundler -q'
+        LOG.info(f'Running "{command}"')
+        system(command)
+
+        rename(output/'output'/'index.html', output/'..'/'index.html')
+
+        if not keep_files:
+            rmtree(output)
 
 
 def parser():
@@ -55,15 +60,25 @@ def parser():
     )
 
     input = Path(args.input).absolute()
-    if args.output:
-        output = Path(args.output, 'rendered').resolve()
+
+    if input.is_file():
+        if args.output:
+            output = Path(args.output, input.with_suffix('.md').name).resolve()
+        else:
+            output = input.with_suffix('.md')
+
+        return input, output, 'file', args.remove_code, args.keep
+
     else:
-        output = Path(input, 'rendered')
+        if args.output:
+            output = Path(args.output, 'rendered').resolve()
+        else:
+            output = Path(input, 'rendered')
 
-    rmtree(output, ignore_errors=True)
-    makedirs(output, exist_ok=True)
+        rmtree(output, ignore_errors=True)
+        makedirs(output, exist_ok=True)
 
-    return input, output, args.remove_code, args.keep
+        return input, output, 'folder', args.remove_code, args.keep
 
 
 LOG = getLogger(__name__)

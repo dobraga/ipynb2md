@@ -1,1 +1,1 @@
-from .files import render_files
+from .files import render_files, render

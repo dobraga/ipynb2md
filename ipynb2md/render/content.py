@@ -37,17 +37,18 @@ class Code:
 
         if 'outputs' in self.content:
             for o in self.content['outputs']:
-                if 'text' in o:
+                if 'text' in o.keys():
                     output += '{}\n\n'.format(''.join(o['text']))
-                elif 'data' in o:
+
+                elif 'data' in o.keys():
                     data = o['data']
 
-                    if 'application/vnd.plotly.v1+json' in data:
+                    if 'application/vnd.plotly.v1+json' in data.keys():
                         self.plotly = True
                         plotly_data = data['application/vnd.plotly.v1+json']
                         output += plotly(plotly_data)
 
-                    elif 'text/html' in data:
+                    elif 'text/html' in data.keys():
                         html = ''.join(data['text/html']).replace('\n', '')
                         html = STYLE.sub('', html)
                         if 'PlotlyConfig' in html:
@@ -57,11 +58,11 @@ class Code:
                         html = html.replace('</table>', '</table></div>')
                         output += '{}\n\n'.format(html)
 
-                    elif 'image/png' in data:
+                    elif 'image/png' in data.keys():
                         output += '<img src="data:image/png;base64,{}"/>\n\n'.format(
                             data['image/png'])
 
-                    elif 'text/plain' in data:
+                    elif 'text/plain' in data.keys():
                         output += ''.join(data['text/plain']) + '\n\n'
 
                     else:
@@ -81,8 +82,7 @@ class NoContent:
 
 def plotly(d: dict) -> str:
     id = str(uuid4())
-    return '''
-<div id="plotly_{id}"></div>
+    return '''<div id="plotly_{id}"></div>
 <script>
 var figure = JSON.parse(`{data}`);
 Plotly.newPlot('plotly_{id}', figure.data, figure.layout, figure.config);
